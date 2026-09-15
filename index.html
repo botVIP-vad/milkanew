@@ -20,7 +20,7 @@ html,body{margin:0;height:100%;padding:0;background:#100a1c;color:var(--text);fo
 .pbtn:hover{background:rgba(168,85,247,.15);border-color:var(--accent)}
 .reset{width:100%;padding:9px;border-radius:10px;background:transparent;color:var(--accent);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.2s;border:1px solid rgba(168,85,247,.3)}
 .reset:hover{background:rgba(168,85,247,.15);border-color:var(--accent)}
-.frame-wrap{width:850px;height:720px;border-radius:16px;overflow:hidden;background:rgba(32,22,51,.25);backdrop-filter:blur(10px);box-shadow:0 10px 34px rgba(0,0,0,.35),0 0 0 2px rgba(168,85,247,.3),0 0 20px rgba(168,85,247,.15);border:2px solid rgba(168,85,247,.4);position:relative}
+.frame-wrap{width:850px;height:calc(100vh - 44px);min-height:720px;border-radius:16px;overflow:hidden;background:rgba(32,22,51,.25);backdrop-filter:blur(10px);box-shadow:0 10px 34px rgba(0,0,0,.35),0 0 0 2px rgba(168,85,247,.3),0 0 20px rgba(168,85,247,.15);border:2px solid rgba(168,85,247,.4);position:relative}
 .leaderboard{width:280px;min-height:170px;display:flex;flex-direction:column;gap:8px;background:rgba(32,22,51,.3);backdrop-filter:blur(10px);border:1px solid rgba(168,85,247,.2);border-radius:16px;padding:16px;box-shadow:0 10px 34px rgba(0,0,0,.35)}
 .leaderboard h3{margin:0 0 8px;color:var(--accent);font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;text-align:center}
 .leaderboard-list{flex:1;overflow:hidden;max-height:none;display:flex;flex-direction:column;gap:4px}
@@ -136,7 +136,7 @@ iframe{width:100%;height:100%;display:block;border:0;background:#100a1c;opacity:
 .nr-dur input{width:52px;padding:4px;background:rgba(0,0,0,.3);border:1px solid rgba(168,85,247,.3);color:var(--text);border-radius:6px;text-align:center}
 .winner-opt{padding:10px;border-radius:8px;background:transparent;color:var(--accent);font-weight:700;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.2s;border:1px solid rgba(168,85,247,.2);text-align:center}
 .winner-opt:hover{background:rgba(168,85,247,.15);border-color:var(--accent)}
-@media(max-width:900px){.app{flex-direction:column;height:auto}.side{width:90vw;max-width:540px}}
+@media(max-width:900px){.app{flex-direction:column;height:auto}.side{width:90vw;max-width:540px}.frame-wrap{width:90vw;max-width:540px;height:70vh;min-height:0}}
 
 /* WHEEL STYLES */
 .wheel-modal{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.85);align-items:center;justify-content:center;backdrop-filter:blur(5px)}
@@ -205,43 +205,43 @@ iframe{width:100%;height:100%;display:block;border:0;background:#100a1c;opacity:
 .stat-item .time{color:var(--text);font-size:12px}
 
 /* WINNER SCREEN MODAL STYLES */
-.winner-modal-content{flex-direction:column;width:620px;height:420px;background:var(--bg);padding:16px;border:none;border-radius:24px;box-shadow:0 0 60px rgba(168,85,247,.3)}
-.close-x{position:absolute;right:14px;top:6px;font-size:22px;color:var(--accent);cursor:pointer;transition:.3s;z-index:10}
+.winner-modal-content{flex-direction:column;width:930px;max-width:96vw;height:630px;max-height:94vh;background:var(--bg);padding:20px;border:none;border-radius:28px;box-shadow:0 0 90px rgba(168,85,247,.3)}
+.close-x{position:absolute;right:14px;top:6px;font-size:32px;color:var(--accent);cursor:pointer;transition:.3s;z-index:10}
 .close-x:hover{transform:scale(1.2);text-shadow:0 0 15px var(--accent)}
 .win-header-block{display:flex;justify-content:space-between;align-items:center;gap:14px;transition:.5s}
 .win-header-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-#win-status-label{color:var(--accent);font-weight:800;letter-spacing:2px;font-size:11px;display:block;margin-bottom:2px;text-transform:uppercase}
-#win-nick{font-size:28px;margin:0;color:#fff;text-shadow:0 0 30px rgba(168,85,247,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-#win-nick.winner-responded{color:var(--accent);text-shadow:0 0 40px rgba(168,85,247,.8)}
-#win-status-label.winner-responded{color:var(--accent);text-shadow:0 0 20px rgba(168,85,247,.7)}
-#reroll-counter-display{color:var(--accent);font-size:11px;font-weight:bold;margin-top:3px}
-#win-timer-label{border:1px solid rgba(168,85,247,.3);padding:6px 14px;border-radius:14px;color:var(--accent);font-size:16px;font-family:'Orbitron',monospace;flex-shrink:0;background:rgba(168,85,247,.05)}
-#win-timer-label.timer-responded{color:#9333ea;background:rgba(168,85,247,.25);border-color:rgba(168,85,247,.55);box-shadow:0 0 25px rgba(168,85,247,.55)}
-.win-grid{display:grid;grid-template-columns:1fr 1fr 220px;gap:10px;flex-grow:1;margin-top:10px;overflow:hidden}
-.win-card{background:rgba(32,22,51,.8);border:1px solid rgba(168,85,247,.12);border-radius:18px;padding:10px;display:flex;flex-direction:column;overflow:hidden}
-.win-card h4{margin-top:0;color:var(--accent);font-size:10px;text-transform:uppercase;letter-spacing:1px}
-#win-chat-history{overflow-y:auto;flex-grow:1;font-size:11px;min-height:0;max-height:110px}
+#win-status-label{color:var(--accent);font-weight:800;letter-spacing:3px;font-size:16px;display:block;margin-bottom:3px;text-transform:uppercase}
+#win-nick{font-size:42px;margin:0;color:#fff;text-shadow:0 0 45px rgba(168,85,247,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#win-nick.winner-responded{color:var(--accent);text-shadow:0 0 60px rgba(168,85,247,.8)}
+#win-status-label.winner-responded{color:var(--accent);text-shadow:0 0 30px rgba(168,85,247,.7)}
+#reroll-counter-display{color:var(--accent);font-size:16px;font-weight:bold;margin-top:4px}
+#win-timer-label{border:2px solid rgba(168,85,247,.3);padding:9px 21px;border-radius:21px;color:var(--accent);font-size:24px;font-family:'Orbitron',monospace;flex-shrink:0;background:rgba(168,85,247,.05)}
+#win-timer-label.timer-responded{color:#9333ea;background:rgba(168,85,247,.25);border-color:rgba(168,85,247,.55);box-shadow:0 0 38px rgba(168,85,247,.55)}
+.win-grid{display:grid;grid-template-columns:1fr 1fr 330px;gap:15px;flex-grow:1;margin-top:15px;overflow:hidden}
+.win-card{background:rgba(32,22,51,.8);border:1px solid rgba(168,85,247,.12);border-radius:18px;padding:14px;display:flex;flex-direction:column;overflow:hidden}
+.win-card h4{margin-top:0;color:var(--accent);font-size:15px;text-transform:uppercase;letter-spacing:1.5px}
+#win-chat-history{overflow-y:auto;flex-grow:1;font-size:16px;min-height:0;max-height:165px}
 #win-chat-history::-webkit-scrollbar{width:4px}
 #win-chat-history::-webkit-scrollbar-thumb{background:var(--accent);border-radius:8px}
 #win-chat-history::-webkit-scrollbar-track{background:rgba(168,85,247,.05);border-radius:8px}
 #win-chat-history div{padding:3px 0;border-bottom:1px solid rgba(168,85,247,.05)}
 #win-chat-history small{color:var(--muted)}
-.win-response-msg{background:rgba(168,85,247,.08) !important;border-left:3px solid var(--accent);border-radius:10px;padding:4px 8px !important;margin:3px 0 !important}
+.win-response-msg{background:rgba(168,85,247,.08) !important;border-left:4px solid var(--accent);border-radius:10px;padding:6px 12px !important;margin:4px 0 !important;font-size:15px}
 .win-stats-row{display:flex;gap:10px;margin-bottom:6px}
 .win-stat-item{padding:4px 0}
-.win-stat-item small{color:var(--muted);font-size:9px;text-transform:uppercase}
-.editable-stat{font-size:14px;font-weight:bold;color:var(--accent);cursor:pointer;transition:.2s}
+.win-stat-item small{color:var(--muted);font-size:13px;text-transform:uppercase}
+.editable-stat{font-size:21px;font-weight:bold;color:var(--accent);cursor:pointer;transition:.2s}
 .editable-stat:hover{text-shadow:0 0 10px var(--accent)}
-#win-drop-history{overflow-y:auto;flex-grow:1;font-size:10px;min-height:0;max-height:140px}
+#win-drop-history{overflow-y:auto;flex-grow:1;font-size:15px;min-height:0;max-height:210px}
 #win-drop-history::-webkit-scrollbar{width:4px}
 #win-drop-history::-webkit-scrollbar-thumb{background:var(--accent);border-radius:8px}
 #win-drop-history::-webkit-scrollbar-track{background:rgba(168,85,247,.05);border-radius:8px}
 #win-drop-history .hist-row{display:flex;flex-direction:column;border-bottom:1px solid rgba(168,85,247,.05);padding:4px 0}
 .win-form{background:rgba(32,22,51,.6);border:1px solid rgba(168,85,247,.12);border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:5px}
-.win-form h3{margin:0;color:var(--accent);font-size:11px;text-transform:uppercase;letter-spacing:1px;text-align:center}
-.win-form input{padding:5px;border-radius:10px;background:rgba(0,0,0,.3);border:1px solid rgba(168,85,247,.2);color:var(--text);font-size:11px;outline:none;transition:.2s}
+.win-form h3{margin:0;color:var(--accent);font-size:16px;text-transform:uppercase;letter-spacing:1.5px;text-align:center}
+.win-form input{padding:8px;border-radius:10px;background:rgba(0,0,0,.3);border:1px solid rgba(168,85,247,.2);color:var(--text);font-size:16px;outline:none;transition:.2s}
 .win-form input:focus{border-color:rgba(168,85,247,.5);box-shadow:0 0 0 2px rgba(168,85,247,.1)}
-.win-form select{width:100%;padding:5px;border-radius:10px;background:rgba(0,0,0,.3);border:1px solid rgba(168,85,247,.2);color:var(--text);font-size:11px;outline:none;transition:.2s;appearance:none;cursor:pointer;text-align:center}
+.win-form select{width:100%;padding:8px;border-radius:10px;background:rgba(0,0,0,.3);border:1px solid rgba(168,85,247,.2);color:var(--text);font-size:16px;outline:none;transition:.2s;appearance:none;cursor:pointer;text-align:center}
 .win-form select:focus{border-color:rgba(168,85,247,.5);box-shadow:0 0 0 2px rgba(168,85,247,.1)}
 .win-form .pbtn{margin-top:4px}
 .win-form .reset{margin-top:3px}
@@ -500,6 +500,7 @@ iframe{width:100%;height:100%;display:block;border:0;background:#100a1c;opacity:
           <option value="PokeDrop">PokeDrop</option>
         </select>
         <button class="pbtn" onclick="saveWinnerStats()" style="margin-top:10px">СОХРАНИТЬ 📊</button>
+        <button class="reset" style="background:rgba(168,85,247,0.18);border-color:rgba(168,85,247,.55);color:#d8b4fe;" onclick="openWinnerSubs()">🔔 ПОДПИСКИ</button>
         <button class="reset" onclick="closeWinnerScreen()">ЗАКРЫТЬ</button>
         <button class="reset" style="background:rgba(192,132,252,0.15);border-color:#c084fc;color:#c084fc;" onclick="reSpinToHome()">ПЕРЕКРУТИТЬ</button>
       </div>
@@ -1318,6 +1319,11 @@ function saveWinnerStats(){
     localStorage.setItem('wokomilka_stats',JSON.stringify(statistics));
   }
   closeWinnerScreen();
+}
+
+function openWinnerSubs(){
+  if(!currentWinner){alert('Победитель ещё не выбран!');return;}
+  window.open('https://followage.showmasterokda.com/?user='+encodeURIComponent(currentWinner),'_blank');
 }
 
 function reSpinToHome(){
