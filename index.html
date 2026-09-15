@@ -661,6 +661,7 @@ function renderLeaderboard(){
       '<span class="amount">'+item.total.toLocaleString()+' ₽</span>'+
       '</div>';
   }).join('');
+  list.classList.toggle('has-scroll',sorted.length>6);
 }
 
 // CUSTOM CHAT RENDERER
