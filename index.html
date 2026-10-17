@@ -483,6 +483,7 @@ iframe{width:100%;height:100%;display:block;border:0;background:#100a1c;opacity:
         <div class="win-stats-row">
           <div class="win-stat-item"><small>Выигрышей:</small> <div id="win-count-stat" class="editable-stat" onclick="editWinnerCounter('count')">0</div></div>
           <div class="win-stat-item"><small>Всего вывел:</small> <div id="win-sum-stat" class="editable-stat" onclick="editWinnerCounter('sum')">0 ₽</div></div>
+          <div class="win-stat-item"><small>Выпадал раз:</small> <div id="win-draw-stat" class="editable-stat" onclick="editWinnerCounter('draw')">0</div></div>
         </div>
         <div class="win-stat-item"><small>Всего депозитов:</small> <div id="win-dep-stat" class="editable-stat" onclick="editWinnerCounter('dep')">0 ₽</div></div>
         <div id="win-drop-history"></div>
@@ -1126,6 +1127,7 @@ function confirmDuel(){
 // WINNER SCREEN VARIABLES (from eneeergyshow mechanics)
 var winTimerActive=false;
 var winnerHistory=JSON.parse(localStorage.getItem('wokomilka_winner_history')||'{}');
+var winDrawCounts=JSON.parse(localStorage.getItem('wokomilka_win_draw_counts')||'{}');
 var participantProfiles=JSON.parse(localStorage.getItem('wokomilka_profiles')||'{}');
 var userMessages={};
 var rerollCount=0;
@@ -1268,6 +1270,10 @@ function showWinner(name){
   document.getElementById('win-count-stat').innerText=userHistory.length;
   document.getElementById('win-sum-stat').innerText=totalWon.toLocaleString()+' ₽';
   document.getElementById('win-dep-stat').innerText=totalDep.toLocaleString()+' ₽';
+  var drawKey=name.toLowerCase();
+  winDrawCounts[drawKey]=(winDrawCounts[drawKey]||0)+1;
+  try{localStorage.setItem('wokomilka_win_draw_counts',JSON.stringify(winDrawCounts));}catch(e){}
+  document.getElementById('win-draw-stat').innerText=winDrawCounts[drawKey];
   renderWinnerHistory(name);
   document.getElementById('win-amount-input').value='';
   document.getElementById('win-deposit-input').value='';
@@ -1349,6 +1355,7 @@ function editWinnerCounter(type){
   if(type==='count')document.getElementById('win-count-stat').innerText=val;
   if(type==='sum')document.getElementById('win-sum-stat').innerText=parseInt(val).toLocaleString()+' ₽';
   if(type==='dep')document.getElementById('win-dep-stat').innerText=parseInt(val).toLocaleString()+' ₽';
+  if(type==='draw')document.getElementById('win-draw-stat').innerText=val;
 }
 
 function closeWinnerScreen(){
