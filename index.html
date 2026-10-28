@@ -552,6 +552,10 @@ iframe{width:100%;height:100%;display:block;border:0;background:#100a1c;opacity:
     <h3>УЧАСТНИКИ: <span id="cnt2">0</span></h3>
     <div class="code-row"><label>Код</label><input id="code" value="+" oninput="saveCode()"></div>
 <div class="code-row"><label>Добавить</label><input id="addPartInput" placeholder="Ник участника" onkeydown="if(event.key==='Enter')addPartManual()"><button class="pbtn" style="margin-left:8px;padding:6px 10px" onclick="addPartManual()">+</button></div>
+<div style="margin-top:8px">
+  <textarea id="bulkAddInput" class="import-textarea" style="min-height:80px" placeholder="Вставьте ники (один на строку)"></textarea>
+  <button class="pbtn" style="margin-top:6px" onclick="addPartsBulk()">Добавить список</button>
+</div>
     <input class="search" id="search" placeholder="Поиск по нику..." oninput="renderModal()">
     <div class="tb-list" id="tb-list"></div>
     <button class="close" onclick="closeModal()">Закрыть</button>
@@ -621,6 +625,7 @@ function openModal(){renderModal();document.getElementById('modal').classList.ad
 function closeModal(){document.getElementById('modal').classList.remove('open');}
 function removePart(n){parts.delete(n);render();renderModal();}
 function addPartManual(){var inp=document.getElementById('addPartInput');var n=inp.value.trim();if(!n)return;if(!parts.has(n)){parts.add(n);render();renderModal();}inp.value='';}
+function addPartsBulk(){var raw=document.getElementById('bulkAddInput').value;if(!raw.trim())return;raw.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean).forEach(function(n){parts.add(n);});render();renderModal();document.getElementById('bulkAddInput').value='';}
 window.addEventListener('message',function(e){
   try{
     var d=e.data;
