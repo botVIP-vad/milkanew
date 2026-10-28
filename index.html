@@ -1421,9 +1421,26 @@ function closeModals(){
 
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeModals();closeWheel();}});
 
-// Чат Kick подключается через iframe (см. #kick-chat-frame).
-// Авто-детект сообщений и кодового слова в Kick-чате недоступен из-за ограничений браузера.
-function connect(){}
+// Подключение к локальному Kick-прокси (kick_proxy/kick_proxy.js)
+(function connectKickProxy(){
+  try{
+    var ws=new WebSocket('ws://localhost:8765');
+    ws.onopen=function(){console.log('Kick proxy connected');};
+    ws.onmessage=function(ev){
+      try{
+        var d=JSON.parse(ev.data);
+        var user=d.user, msg=d.msg;
+        if(!user||msg==null)return;
+        var time=new Date().toLocaleTimeString();
+        if(!userMessages[user])userMessages[user]=[];
+        userMessages[user].push({time:time,text:msg,id:null});
+        if(String(msg).trim().toLowerCase()===code.toLowerCase()&&!parts.has(user)){parts.add(user);render();renderModal();}
+      }catch(e){}
+    };
+    ws.onclose=function(){setTimeout(connectKickProxy,5000);};
+    ws.onerror=function(){};
+  }catch(e){}
+})();
 
 var f=document.getElementById('kick-chat-frame');
 f.src='https://kick.com/popout/wokomilka/chat';
